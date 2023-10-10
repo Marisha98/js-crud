@@ -1,0 +1,45 @@
+@use '../../lib/service.scss' as s;
+
+.alert {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: s.space(5);
+	margin: s.space(3);
+	gap: s.space(8);
+	box-shadow: 0px 0px 8px s.color(light);
+	border-radius: 10px;
+
+
+
+	&__content {
+		display: flex;
+	flex-direction: column;
+	gap: s.space(4);
+	font-size: 16px;
+	}
+
+	&__title {
+		font-size: 18px;
+		font-weight: bold;
+	}
+
+	&__button-back {
+		background-color: s.color(blue);
+		font-size: 18px;
+		padding: s.space(1) s.space(10);
+		border-radius: 5px;
+	}
+
+	&__button-back:hover {
+		opacity: 0.7;
+		transition: 1s;
+	}
+}
+
+a {
+	color: s.color(white);
+	text-decoration: none;
+  }
+ 
+

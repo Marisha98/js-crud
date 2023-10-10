@@ -58,6 +58,60 @@ class User {
   }
 }
 
+class Product {
+  static #list = []
+
+  constructor(name, price, description) {
+    this.name = name
+    this.price = price
+    this.description = description
+    this.id = Math.floor(Math.random() * 90000)
+    this.createDate = new Date().toISOString()
+  }
+
+  static getList = () => this.#list
+
+  static add = (product) => this.#list.push(product)
+
+  static getById = (id) =>
+    this.#list.find((product) => product.id === id)
+
+  static deleteById = (id) => {
+    const index = this.#list.findIndex(
+      (product) => product.id === id,
+    )
+
+    if (index !== -1) {
+      this.#list.splice(index, 1)
+      return true
+    } else {
+      return false
+    }
+  }
+
+  static updateById = (id, data) => {
+    const product = this.getById(id)
+
+    if (product) {
+      this.update(product, data)
+
+      return true
+    } else {
+      return false
+    }
+  }
+
+  static update = (
+    product,
+    { name, price, description },
+  ) => {
+    if ((name, price, description)) {
+      product.name = name
+      product.price = price
+      product.description = description
+    }
+  }
+}
 // ================================================================
 
 // router.get Створює нам один ентпоїнт
@@ -133,6 +187,105 @@ router.post('/user-update', function (req, res) {
     info: result
       ? 'Email пошта оновлена'
       : 'Сталася помилка',
+  })
+})
+
+// ================================================================
+
+router.get('/product-create', function (req, res) {
+  res.render('product-create', {
+    style: 'product-create',
+  })
+})
+
+// ================================================================
+
+router.post('/product-create', function (req, res) {
+  const { name, price, description } = req.body
+
+  const product = new Product(name, price, description)
+
+  Product.add(product)
+
+  console.log(Product.getList())
+
+  res.render('alert', {
+    style: 'alert',
+    resultTitle: 'Успішне виконання дії',
+    info: 'Продукт успішно створено',
+  })
+})
+
+// ================================================================
+
+router.get('/product-list', function (req, res) {
+  const list = Product.getList()
+
+  res.render('product-list', {
+    style: 'product-list',
+
+    data: {
+      products: {
+        list,
+        isEmpty: list.length === 0,
+      },
+    },
+  })
+})
+
+// ================================================================
+
+router.get('/product-edit', function (req, res) {
+  const { id } = req.query
+
+  const list = Product.getList()
+
+  const product = Product.getById(Number(id))
+
+  if (product) {
+    res.render('product-edit', {
+      style: 'product-edit',
+
+      data: {
+        products: {
+          list,
+          isEmpty: list.length === 0,
+        },
+      },
+    })
+  } else {
+    res.render('alert', {
+      style: 'alert',
+      resultTitle: 'Неуспішне виконання дії',
+      info: 'Товар з таким ID не знайдено',
+    })
+  }
+})
+
+// ================================================================
+
+router.post('/product-edit', function (req, res) {
+  const { name, price, description, id } = req.body
+
+  let result = false
+
+  const product = Product.getById(Number(id))
+
+  if ((name, price, description)) {
+    Product.update(product, { name, price, description })
+
+    result = true
+  }
+
+  res.render('alert', {
+    style: 'alert',
+
+    resultTitle: result
+      ? 'Успішне виконання дії'
+      : 'Неуспішне виконання дії',
+    info: result
+      ? 'Товар оновлено'
+      : 'Не вдалось оновити товар',
   })
 })
 

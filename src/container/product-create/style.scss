@@ -7,11 +7,9 @@
 	gap: s.space(8);
 
 	&__title {
-		font-size: 20px;
+		font-size: 24px;
 		font-weight: bold;
 		padding-bottom: s.space(1);
-		border-bottom: 1px solid s.color('light');
-		
 	}
 
 	&__content {
@@ -19,26 +17,40 @@
 		gap: s.space(6);
 	}
 
+	&__doubleField {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: s.space(3);
+	}
+
 	&__field {
 		display: flex;
+
 		flex-direction: column;
 		gap: s.space(2);
 	}
 
 	&__label {
-		font-size: 14px;
+		font-size: 16px;
+		
 	}
 
 	&__input {
 		border: 1px solid s.color('light');
-		padding: s.space(2);
-		
+		padding: s.space(1);
+		border-radius: 5px;
+	}
+
+	&__description {
+	font-size: 14;
+	color: s.color(gray);
 	}
 
 	&__button {
-		border: 1px solid s.color('light');
+		background-color: s.color(blue);
+		color: s.color(white);
 		padding: s.space(2);
-		border-radius: 20px;
+		border-radius: 5px;
 	}
 }
 
@@ -54,4 +66,8 @@ main {
 		padding-top: 5px;
 		padding-bottom: 5px;
 	}
+}
+
+.input-height {
+	height: 60px;
 }

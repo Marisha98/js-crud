@@ -1,0 +1,94 @@
+main {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+}
+
+.main__title {
+  font-size: 30;
+  color: #1881d7;
+  margin-bottom: 32px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.form__title {
+  font-size: 24px;
+  font-weight: bold;
+  padding-bottom: 4px;
+}
+.form__content {
+  display: grid;
+  gap: 24px;
+}
+.form__doubleField {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+.form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.form__label {
+  font-size: 16px;
+}
+.form__input {
+  border: 1px solid #d5d3d3;
+  padding: 4px;
+  border-radius: 5px;
+}
+.form__description {
+  font-size: 14;
+  color: #707070;
+}
+.form__button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  color: #fff;
+  font-size: 18px;
+  gap: 16px;
+  border-radius: 5px;
+}
+.form__button .btn-primary {
+  background-color: #1881d7;
+  padding: 8px;
+}
+.form__button .btn-primary:hover {
+  opacity: 0.7;
+  transition: 0.7s;
+}
+.form__button .btn-warning {
+  background-color: rgb(236, 27, 27);
+  padding: 8px;
+}
+.form__button .btn-warning:hover {
+  opacity: 0.7;
+  transition: 0.7s;
+}
+.form__button a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.input-height {
+  height: 60px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 16px 0;
+  padding: 16px;
+  box-shadow: 0px 0px 8px #d5d3d3;
+  border-radius: 15px;
+}
+
+/*# sourceMappingURL=style.css.map */
