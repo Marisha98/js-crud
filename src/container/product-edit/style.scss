@@ -1,0 +1,113 @@
+@use '../../lib/service.scss' as s;
+
+main {
+	display: flex;
+	flex-direction: column;
+	padding: s.space(10);
+
+	
+}
+
+.main__title {
+	font-size: 30;
+	color: s.color(blue);
+	margin-bottom: s.space(8);
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: s.space(8);
+
+	&__title {
+		font-size: 24px;
+		font-weight: bold;
+		padding-bottom: s.space(1);
+	}
+
+	&__content {
+		display: grid;
+		gap: s.space(6);
+	}
+
+	&__doubleField {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		gap: s.space(3);
+	}
+
+	&__field {
+		display: flex;
+
+		flex-direction: column;
+		gap: s.space(2);
+	}
+
+	&__label {
+		font-size: 16px;
+		
+	}
+
+	&__input {
+		border: 1px solid s.color('light');
+		padding: s.space(1);
+		border-radius: 5px;
+	}
+
+	&__description {
+	font-size: 14;
+	color: s.color(gray);
+	}
+
+	&__button {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		width: 100%;
+		color: s.color(white);
+		font-size: s.size('middle');
+		gap: s.space(4);
+		border-radius: 5px;
+		
+		
+
+		.btn-primary {
+			background-color: s.color(blue);
+			padding: s.space(2);
+
+			&:hover {
+				opacity: 0.7;
+				transition: 0.7s;
+			}
+		}
+
+		.btn-warning {
+			background-color: s.color(red);
+			padding: s.space(2);
+
+			&:hover {
+				opacity: 0.7;
+				transition: 0.7s;
+			}
+		}
+		
+		a {
+			text-decoration: none;
+			color: s.color(white);
+		}
+	}
+}
+
+.input-height {
+	height: 60px;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	gap: s.space(4);
+	margin: s.space(4) 0;
+	padding: s.space(4);
+	box-shadow: 0px 0px 8px s.color(light);
+	border-radius: 15px;
+}

@@ -1,7 +1,23 @@
 $colorMap: (
-	light: #ddd,
+	white: #fff,
+	light: #d5d3d3,
+	gray: #707070,
+	blue: #1881d7,
+	bright-blue:#1858d7,
+	red: rgb(236, 27, 27),
 );
 
 @function color ($key) {
 	@return map-get($colorMap, $key);
+}
+
+$sizeMap: (
+	big: 22px,
+	default: 20px,
+	middle: 18px,
+	small: 16px,
+);
+
+@function size ($key: 'default') {
+	@return map-get($sizeMap, $key);
 }
