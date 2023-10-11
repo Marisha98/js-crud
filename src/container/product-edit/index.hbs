@@ -6,8 +6,7 @@
 <main>
 	<h1 class="main__title">Редагування товару</h1>
 	<section>
-		{{#with data.products}}
-		{{#each list}}
+		{{#with data}}
 		<div class="card" method="POST" action="/product-edit">
 			<div class="form">
 				<h1 class="form__title">Інформація про товар</h1>
@@ -44,7 +43,6 @@
 				</form>
 			</div>
 		</div>
-		{{/each}}
 		{{/with}}
 	</section>
 </main>
