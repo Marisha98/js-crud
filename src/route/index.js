@@ -105,9 +105,13 @@ class Product {
     product,
     { name, price, description },
   ) => {
-    if ((name, price, description)) {
+    if (name) {
       product.name = name
+    }
+    if (price) {
       product.price = price
+    }
+    if (description) {
       product.description = description
     }
   }
@@ -238,19 +242,19 @@ router.get('/product-list', function (req, res) {
 router.get('/product-edit', function (req, res) {
   const { id } = req.query
 
-  const list = Product.getList()
-
   const product = Product.getById(Number(id))
 
+  console.log(product)
+
   if (product) {
-    res.render('product-edit', {
+    return res.render('product-edit', {
       style: 'product-edit',
 
       data: {
-        products: {
-          list,
-          isEmpty: list.length === 0,
-        },
+        name: product.name,
+        price: product.price,
+        id: product.id,
+        description: product.description,
       },
     })
   } else {
@@ -265,27 +269,43 @@ router.get('/product-edit', function (req, res) {
 // ================================================================
 
 router.post('/product-edit', function (req, res) {
-  const { name, price, description, id } = req.body
+  const { id, name, price, description } = req.body
 
-  let result = false
+  const product = Product.updateById(Number(id), {
+    name,
+    price,
+    description,
+  })
 
-  const product = Product.getById(Number(id))
+  console.log(id)
+  console.log(product)
 
-  if ((name, price, description)) {
-    Product.update(product, { name, price, description })
+  if (product) {
+    res.render('alert', {
+      style: 'alert',
 
-    result = true
+      resultTitle: 'Успішне виконання дії',
+      info: 'Товар оновлено',
+    })
+  } else {
+    res.render('alert', {
+      style: 'alert',
+      resultTitle: 'Неуспішне виконання дії',
+      info: 'Сталася помилка',
+    })
   }
+})
+
+// ================================================================
+
+router.get('/product-delete', function (req, res) {
+  const { id } = req.query
+
+  Product.deleteById(Number(id))
 
   res.render('alert', {
     style: 'alert',
-
-    resultTitle: result
-      ? 'Успішне виконання дії'
-      : 'Неуспішне виконання дії',
-    info: result
-      ? 'Товар оновлено'
-      : 'Не вдалось оновити товар',
+    resultTitle: 'Продукт видалено',
   })
 })
 
