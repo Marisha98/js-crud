@@ -37,6 +37,7 @@
 
 	&__input {
 		border: 1px solid s.color('light');
+		height: 3vh;
 		padding: s.space(1);
 		border-radius: 5px;
 	}
@@ -48,6 +49,8 @@
 
 	&__button {
 		background-color: s.color(blue);
+		font-size: s.size('middle');
+		height: 3vh;
 		color: s.color(white);
 		padding: s.space(2);
 		border-radius: 5px;

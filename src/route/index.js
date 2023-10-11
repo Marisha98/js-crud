@@ -107,9 +107,11 @@ class Product {
   ) => {
     if (name) {
       product.name = name
-    } else if (price) {
+    }
+    if (price) {
       product.price = price
-    } else if (description) {
+    }
+    if (description) {
       product.description = description
     }
   }

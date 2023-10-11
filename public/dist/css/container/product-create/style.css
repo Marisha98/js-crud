@@ -28,6 +28,7 @@
 }
 .form__input {
   border: 1px solid #d5d3d3;
+  height: 3vh;
   padding: 4px;
   border-radius: 5px;
 }
@@ -37,6 +38,8 @@
 }
 .form__button {
   background-color: #1881d7;
+  font-size: 18px;
+  height: 3vh;
   color: #fff;
   padding: 8px;
   border-radius: 5px;
