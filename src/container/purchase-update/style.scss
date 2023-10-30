@@ -1,7 +1,10 @@
 @use '../../lib/service.scss' as s;
 
 @use '../../component/heading/style.scss' as heading;
+@use '../../component/purchase-product/style.scss' as purchaseProduct;
+@use '../../component/field/style.scss' as field;
 @use '../../component/divider/style.scss' as divider;
+@use '../../component/button/style.scss' as button;
 
 .main {
 	display: flex;
@@ -10,36 +13,28 @@
 	padding: s.space(10);
 }
 
-.product-list {
+.form-card {
+	width: 100%;
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
-}
-
-.product-list__header {
-	display: grid;
-	grid-template-columns: 10% 40% 25% 25%;
-}
-
-.purchase-item {
-	display: grid;
-	grid-template-columns: 10% 40% 25% 25%;
-	padding: 30px 0;
-	
-	
+	gap: s.space(5);
+	padding: s.space(5);
+	border: 1px solid s.color(light);
+	border-radius: 10px;
 }
 
 .purchase-item__block {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
+
+	&__2columnns {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 15px;
+	}
 }
 
 .title {
 	color: s.color(gray);
-}
-
-a {
-	text-decoration: none;
-	color: black
 }

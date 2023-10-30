@@ -1,0 +1,77 @@
+<main class="main">
+	{{#with data}}
+	<div class="form-card">
+		{{>heading title="Інформація про замовлення"}}
+
+		<div class='purchase-item__block'>
+			<span class='title'>ID:</span>
+			<span class='text'>{{id}}</span>
+		</div>
+
+		{{>divider}}
+
+
+		<div class="purchase-item__block__2columnns">
+			<div class='purchase-item__block'>
+				<span class='title'>Iм'я:</span>
+				<span class='text'>{{firstname}}</span>
+			</div>
+
+			<div class='purchase-item__block'>
+				<span class='title'>Призвіще:</span>
+				<span class='text'>{{lastname}}</span>
+			</div>
+
+			<div class='purchase-item__block'>
+				<span class='title'>Телефон:</span>
+				<span class='text'>{{phone}}</span>
+			</div>
+
+			<div class='purchase-item__block'>
+				<span class='title'>Електонна пошта:</span>
+				<span class='text'>{{email}}</span>
+			</div>
+		</div>
+
+		{{>divider}}
+
+		<div class='purchase-item__block'>
+			<span class='title'>Назва товару:</span>
+			<span class='text'>{{product.title}}</span>
+		</div>
+
+		<div class='purchase-item__block'>
+			<span class='title'>Коментар:</span>
+			<span class='text'>{{comment}}</span>
+		</div>
+
+		{{>divider}}
+
+		<div class="purchase-item__block__2columnns">
+
+			<div class='purchase-item__block'>
+				<span class='title'>Вартість товарів:</span>
+				<span class='text'>{{productPrice}}</span>
+			</div>
+
+			<div class='purchase-item__block'>
+				<span class='title'>Вартість доставки:</span>
+				<span class='text'>{{deliveryPrice}}</span>
+			</div>
+
+			<div class='purchase-item__block'>
+				<span class='title'>Сума до сплати:</span>
+				<span class='text'>{{totalPrice}}</span>
+			</div>
+
+			<div class='purchase-item__block'>
+				<span class='title'>Нараховані бонуси:</span>
+				<span class='text'>{{bonus}}</span>
+			</div>
+
+		</div>
+		{{>divider}}
+		<a href="/purchase-update?id={{id}}">{{>button text="Змінити дані"}}</a>
+	</div>
+	{{/with}}
+</main>

@@ -59,7 +59,7 @@ class Product {
 
 Product.add(
   'https://picsum.photos/200/300',
-  `Компьютер Artline Gaming (X43v31) AMD Ryzen 5 3600`,
+  `Комп'ютер Artline Gaming (X43v31) AMD Ryzen 5 3600`,
   `AMD Ryzen 5 3600 (3.6 - 4.2 ГГц) / RAM 16 ГБ / HDD 1 ТБ + SSD 480 ГБ / nVidia GeForce RTX 3050, 8 ГБ / без ОД / LAN / без ОС`,
   [
     { id: 1, text: 'Готовий до відправки' },
@@ -71,7 +71,7 @@ Product.add(
 
 Product.add(
   'https://picsum.photos/200/300',
-  `Компьютер ARTLINE Gaming X63 (X63v26) AMD Ryzen 5 5600`,
+  `Комп'ютер ARTLINE Gaming X63 (X63v26) AMD Ryzen 5 5600`,
   `AMD Ryzen 5 5600 (3.5 - 4.4 ГГц) / RAM 16 ГБ / SSD 1 ТБ / nVidia GeForce RTX 3060 Ti, 8 ГБ / без ОД / LAN / без ОС`,
   [{ id: 2, text: 'Топ продажів' }],
   20000,
@@ -80,7 +80,7 @@ Product.add(
 
 Product.add(
   'https://picsum.photos/200/300',
-  `Компьютер Lenovo IdeaCentre G5 Gaming 14IOB6 `,
+  `Комп'ютер Lenovo IdeaCentre G5 Gaming 14IOB6 `,
   `Intel Core i5-10400F (2.9 - 4.3 ГГц) / RAM 16 ГБ / HDD 1 ТБ + SSD 256 ГБ / nVidia GeForce GTX 1650 Super, 4 ГБ / без ОД / LAN / Wi-Fi / Bluetooth / без ОС`,
   [{ id: 1, text: 'Готовий до відправки' }],
   40000,
@@ -467,7 +467,7 @@ router.post('/purchase-submit', function (req, res) {
 // ================================================================
 
 router.get('/purchase-list', function (req, res) {
-  const id = Number(req.query.id)
+  const list = Purchase.getList()
 
   // ↙ cюди вводимо назву файлу з сontainer
   res.render('purchase-list', {
@@ -475,11 +475,121 @@ router.get('/purchase-list', function (req, res) {
     style: 'purchase-list',
 
     data: {
-      list: Product.getList(),
+      purchases: {
+        list,
+      },
     },
   })
   // ↑↑ сюди вводимо JSON дані
 })
 
-// Підключаємо роутер до бек-енду
+// ================================================================
+
+router.get('/purchase-info', function (req, res) {
+  const id = Number(req.query.id)
+  const purchase = Purchase.getById(id)
+
+  const bonus = Purchase.calcBonusAmount(
+    purchase.totalPrice,
+  )
+
+  console.log(purchase)
+
+  res.render('purchase-info', {
+    style: 'purchase-info',
+
+    data: {
+      id: purchase.id,
+      firstname: purchase.firstname,
+      lastname: purchase.lastname,
+      phone: purchase.phone,
+      email: purchase.email,
+      comment: purchase.comment,
+      product: purchase.product,
+      productPrice: purchase.productPrice,
+      deliveryPrice: purchase.deliveryPrice,
+      totalPrice: purchase.totalPrice,
+      bonus: bonus,
+    },
+  })
+})
+
+// ================================================================
+
+router.get('/purchase-update', function (req, res) {
+  const id = Number(req.query.id)
+
+  const purchase = Purchase.getById(id)
+
+  if (!purchase) {
+    return res.render('alert', {
+      style: 'alert',
+      data: {
+        message: 'Помилка',
+        info: 'Замовлення не знайдено',
+        link: '/purchase-list',
+      },
+    })
+  }
+
+  res.render('purchase-update', {
+    style: 'purchase-update',
+    data: {
+      id: purchase.id,
+      firstname: purchase.firstname,
+      lastname: purchase.lastname,
+      email: purchase.email,
+      phone: purchase.phone,
+      comment: purchase.comment,
+      amount: purchase.amount,
+    },
+  })
+})
+
+router.post('/purchase-update', function (req, res) {
+  const id = Number(req.query.id)
+
+  const purchase = Purchase.getById(id)
+
+  if (!purchase) {
+    return res.render('alert', {
+      style: 'alert',
+      data: {
+        message: 'Помилка',
+        info: 'Замовлення не знайдено',
+        link: '/purchase-list',
+      },
+    })
+  }
+
+  const data = {
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    email: req.body.email,
+    phone: req.body.phone,
+  }
+
+  const isUpdated = Purchase.updateById(id, data)
+
+  if (isUpdated) {
+    res.render('alert', {
+      style: 'alert',
+      data: {
+        message: 'Успішно',
+        info: 'Дані оновлено',
+        link: `/purchase-info?id=${id}`,
+      },
+    })
+  } else {
+    res.render('alert', {
+      style: 'alert',
+      data: {
+        message: 'Помилка',
+        info: 'Замовлення не знайдено або некорректні дані',
+        link: '/purchase-list',
+      },
+    })
+  }
+})
+
 module.exports = router
