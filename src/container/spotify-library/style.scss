@@ -1,0 +1,45 @@
+@use '../../lib/service.scss' as s;
+
+@use '../../lib/spotify.scss' as spotify;
+
+.add-button {
+	display: grid;
+	grid-template-columns: 1fr;
+	align-items: center;
+}
+
+.title {
+	font-size: 40px;
+}
+
+.library {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 52px s.space(7) ;
+}
+
+.header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.header__menu {
+	display: flex;
+	flex-direction: row;
+	justify-content: end;
+	gap: s.space(6);
+}
+
+.playlist {
+	display: flex;
+	flex-direction: column;
+	width: 345px;
+	align-items: flex-start;
+	
+}
+
+.playlist__content {
+	
+	gap: 20;
+}
